@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import os
 import time
@@ -10,7 +10,7 @@ from src.follow_protocol import follow_protocol
 from src.unfollow_protocol import unfollow_protocol
 
 bot = InstaBot(
-    login="marmitadavoelo",
+    login="uvaiaoficial",
     password="95422106",
     like_per_day=1500,
     comments_per_day=0,
@@ -47,27 +47,28 @@ bot = InstaBot(
     ### 'free_followers' will be blocked because it contains 'free'
     unwanted_username_list=[],
     unfollow_whitelist=[])
+
 while True:
 
-    #print("# MODE 0 = ORIGINAL MODE BY LEVPASHA")
-    #print("## MODE 1 = MODIFIED MODE BY KEMONG")
-    #print("### MODE 2 = ORIGINAL MODE + UNFOLLOW WHO DON'T FOLLOW BACK")
-    #print("#### MODE 3 = MODIFIED MODE : UNFOLLOW USERS WHO DON'T FOLLOW YOU BASED ON RECENT FEED")
-    #print("##### MODE 4 = MODIFIED MODE : FOLLOW USERS BASED ON RECENT FEED ONLY")
-    #print("###### MODE 5 = MODIFIED MODE : JUST UNFOLLOW EVERYBODY, EITHER YOUR FOLLOWER OR NOT")
+    # print("# MODE 0 = ORIGINAL MODE BY LEVPASHA")
+    # print("## MODE 1 = MODIFIED MODE BY KEMONG")
+    # print("### MODE 2 = ORIGINAL MODE + UNFOLLOW WHO DON'T FOLLOW BACK")
+    # print("#### MODE 3 = MODIFIED MODE : UNFOLLOW USERS WHO DON'T FOLLOW YOU BASED ON RECENT FEED")
+    # print("##### MODE 4 = MODIFIED MODE : FOLLOW USERS BASED ON RECENT FEED ONLY")
+    # print("###### MODE 5 = MODIFIED MODE : JUST UNFOLLOW EVERYBODY, EITHER YOUR FOLLOWER OR NOT")
 
     ################################
     ##  WARNING   ###
     ################################
 
     # DON'T USE MODE 5 FOR A LONG PERIOD. YOU RISK YOUR ACCOUNT FROM GETTING BANNED
-    ## USE MODE 5 IN BURST MODE, USE IT TO UNFOLLOW PEOPLE AS MANY AS YOU WANT IN SHORT TIME PERIOD
+    # USE MODE 5 IN BURST MODE, USE IT TO UNFOLLOW PEOPLE AS MANY AS YOU WANT IN SHORT TIME PERIOD
 
     mode = 0
 
-    #print("You choose mode : %i" %(mode))
-    #print("CTRL + C to cancel this operation or wait 30 seconds to start")
-    #time.sleep(30)
+    # print("You choose mode : %i" %(mode))
+    # print("CTRL + C to cancel this operation or wait 30 seconds to start")
+    # time.sleep(30)
 
     if mode == 0:
         bot.new_auto_mod()
@@ -91,8 +92,10 @@ while True:
         bot.new_auto_mod()
 
     elif mode == 3:
-        unfollow_protocol(bot)
-        time.sleep(10 * 60)
+        bot.bot_mode = 3
+        while bot.login_status == 1:
+            bot.unfollow_recent_feed()
+            time.sleep(5)
 
     elif mode == 4:
         feed_scanner(bot)
@@ -106,3 +109,4 @@ while True:
 
     else:
         print("Wrong mode!")
+
